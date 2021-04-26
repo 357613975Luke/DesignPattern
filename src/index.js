@@ -1,10 +1,25 @@
-class Test{
-    constructor(name){
-        this.name=name
-    }
-    alertName(subName){
-        alert(this.name+subName)
-    }
+/*
+ * @Description:
+ * @Author: Luke Z
+ * @Date: 2021-04-25 23:20:31
+ * @LastEditors: Luke Z
+ * @LastEditTime: 2021-04-25 23:23:57
+ * @FilePath: /DesignPattern/src/index.js
+ */
+class SingleObject {
+  login() {
+    console.log("login...");
+  }
 }
-let _p=new Test('hi')
-_p.alertName('helo')
+SingleObject.getInstance = function () {
+  let instance;
+  return function () {
+    if (!instance) {
+      instance = new SingleObject();
+    }
+    return instance;
+  };
+};
+const obj1 = SingleObject.getInstance();
+const obj2 = SingleObject.getInstance();
+console.log(obj1 === obj2);
